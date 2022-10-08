@@ -1,7 +1,7 @@
 # Helm Utils
 
 You can see which repositories are configured using __helm repo list__
-```
+```bash
 $ helm repo list
 NAME                	URL                                               
 prometheus-community	https://prometheus-community.github.io/helm-charts
@@ -12,14 +12,14 @@ tyk-helm            	https://helm.tyk.io/public/helm/charts
 ```
 
 New repositories can be added using:
-```
+```bash
 helm repo add dev https://example.com/dev-charts
 ```
 
 
 Output values from a specific helm/chart to a __values.yaml__ file. This file can be modified and then applied together with the chart. It will overwrite the chart values.
 
-```
+```bash
 helm show values grafana/grafana > values.yaml
 ```
 
@@ -92,7 +92,7 @@ imageCredentials:
 ```
 
 The helper template would be something like this:
-```
+```tpl
 {{- define "imagePullSecret" }}
 {{- with .Values.imageCredentials }}
 {{- printf "{\"auths\":{\"%s\":{\"username\":\"%s\",\"password\":\"%s\",\"email\":\"%s\",\"auth\":\"%s\"}}}" .registry .username .password .email (printf "%s:%s" .username .password | b64enc) | b64enc }}
